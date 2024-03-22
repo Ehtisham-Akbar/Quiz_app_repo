@@ -1,29 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="TestEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="ContentQuestions" EntityType="TestModel.ContentQuestion" />
     <EntitySet Name="NetworkInfoes" EntityType="TestModel.NetworkInfo" />
     <EntitySet Name="UserContents" EntityType="TestModel.UserContent" />
+    <EntitySet Name="ContentQuestions" EntityType="TestModel.ContentQuestion" />
     <AssociationSet Name="FK_ContentQuestions_UserContent" Association="TestModel.FK_ContentQuestions_UserContent">
       <End Role="UserContent" EntitySet="UserContents" />
       <End Role="ContentQuestion" EntitySet="ContentQuestions" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="ContentQuestion">
-    <Key>
-      <PropertyRef Name="QuestionID" />
-    </Key>
-    <Property Name="QuestionID" Type="Int32" Nullable="false" />
-    <Property Name="QuestionText" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="AnswerA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="AnswerB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="AnswerC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="AnswerD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="CorrectAnswer" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="UserContent" Relationship="TestModel.FK_ContentQuestions_UserContent" FromRole="ContentQuestion" ToRole="UserContent" />
-  </EntityType>
   <EntityType Name="NetworkInfo">
     <Key>
       <PropertyRef Name="Code" />
@@ -42,6 +27,21 @@
     <Property Name="Wins" Type="Int32" />
     <Property Name="Losses" Type="Int32" />
     <NavigationProperty Name="ContentQuestions" Relationship="TestModel.FK_ContentQuestions_UserContent" FromRole="UserContent" ToRole="ContentQuestion" />
+  </EntityType>
+  <EntityType Name="ContentQuestion">
+    <Key>
+      <PropertyRef Name="QuestionID" />
+    </Key>
+    <Property Name="QuestionID" Type="Int32" Nullable="false" />
+    <Property Name="QuestionText" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="AnswerA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AnswerB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AnswerC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AnswerD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CorrectAnswer" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserContent" Relationship="TestModel.FK_ContentQuestions_UserContent" FromRole="ContentQuestion" ToRole="UserContent" />
   </EntityType>
   <Association Name="FK_ContentQuestions_UserContent">
     <End Type="TestModel.UserContent" Role="UserContent" Multiplicity="0..1" />

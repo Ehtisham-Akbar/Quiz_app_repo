@@ -21,7 +21,7 @@ namespace Test.Models
         public string AnswerC { get; set; }
         public string AnswerD { get; set; }
         public string CorrectAnswer { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
         public string Username { get; set; }
     
         public virtual UserContent UserContent { get; set; }

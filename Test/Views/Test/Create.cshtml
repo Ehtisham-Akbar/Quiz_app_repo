@@ -1,33 +1,87 @@
-﻿@model Test.Models.UserContent
+﻿@model Test.Models.ContentQuestion
+@using Test.Models
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/_ViewStart.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Create New User</h2>
+<script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+<div class="container-fluid" style="margin-top:60px;background:white">
+    @using (Html.BeginForm("Create", "Test", FormMethod.Post, new { enctype = "multipart/form-data", id = "Create", name = "Create" }))
+    {
+        <div class="row"> 
+            <div class="">
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Add Or Edit Record</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="Name">User*</label>
+                            @Html.TextBoxFor(a => a.Username, new { @class = "form-control", @Required = "required" })
+                            <span class="text-danger">@Html.ValidationMessageFor(a => a.Username)</span>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <label for="Name">Upload User Image</label>
+                                @Html.LabelFor(x => x.Image, new { @placeholder = "Image type ", Type = "file", @required = "required" })
+                                <input type="file" name="image" id="image" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="Name">AnswerA*</label>
+                            @Html.TextBoxFor(a => a.AnswerA, new { @class = "form-control", @Required = "required" })
+                            <span class="text-danger">@Html.ValidationMessageFor(a => a.AnswerA)</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="Name">AnswerB*</label>
+                            @Html.TextBoxFor(a => a.AnswerB, new { @class = "form-control", @Required = "required" })
+                            <span class="text-danger">@Html.ValidationMessageFor(a => a.AnswerB)</span>
+                        </div>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="Name">AnswerC*</label>
+                            @Html.TextBoxFor(a => a.AnswerC, new { @class = "form-control", @Required = "required" })
+                            <span class="text-danger">@Html.ValidationMessageFor(a => a.AnswerC)</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="Name">AnswerD*</label>
+                            @Html.TextBoxFor(a => a.AnswerD, new { @class = "form-control", @Required = "required" })
+                            <span class="text-danger">@Html.ValidationMessageFor(a => a.AnswerD)</span>
+                        </div>
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="Name">CorrectAnswer*</label>
+                            @Html.TextBoxFor(a => a.CorrectAnswer, new { @class = "form-control", @Required = "required" })
+                            <span class="text-danger">@Html.ValidationMessageFor(a => a.CorrectAnswer)</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="Name">QuestionText*</label>
+                            @Html.TextBoxFor(a => a.QuestionText, new { @class = "form-control", @Required = "required" })
+                            <span class="text-danger">@Html.ValidationMessageFor(a => a.QuestionText)</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 singlesacrensavebuttonmargin" style="float:right">
+                            <button type="reset" class="btn btn-success pull-right" style="margin-left:5px;background-color:green;border-color:green; margin: 5px;"><a href="~/Blog/List" style="color:white;">Cancel</a> </button>
+                            <button type="submit" id="Savecategory" class="btn btn-primary pull-right" style="margin: 5px;">Save</button>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
         </div>
-        <!-- Add other fields for FirstName, LastName, ThreeDigitNumber, Wins, Losses -->
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+    }
+</div>
+<style>
+</style>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    CKEDITOR.replace('editor1');
+</script>
 
-@*<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>*@
+

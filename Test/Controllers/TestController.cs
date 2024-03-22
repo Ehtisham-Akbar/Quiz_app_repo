@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Test.Models;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using Test.Models;
+using System.Net;
 
 namespace Test.Controllers
 {
@@ -34,113 +35,84 @@ namespace Test.Controllers
         public ActionResult Create(ContentQuestion contentQuestion, HttpPostedFileBase image)
         {
 
-            //if (image != null)
-            //{
-            //    contentQuestion.Image = UploadPhoto(image).ToString();
+            if (image != null)
+            {
+                contentQuestion.Image = UploadPhoto(image);
 
-            //}
-            //else
-            //{
-            //    contentQuestion.Image = TempData["Photo"].ToString();
-            //}
-
+            }
+            else
+            {
+                contentQuestion.Image = TempData["Photo"].ToString();
+            }
             if (contentQuestion.QuestionID > 0)
             {
+
                 _context.Entry(contentQuestion).State = EntityState.Modified;
                 _context.SaveChanges();
+                ModelState.Clear();
             }
             else
             {
                 _context.ContentQuestions.Add(contentQuestion);
                 _context.SaveChanges();
             }
-
             return RedirectToAction("List");
         }
-
-       
-
         public ActionResult Index()
         {
             var users = _context.UserContents.ToList();
             return View(users);
         }
 
-        // GET: UserContent/Details/5
-        public ActionResult Details(string username)
+        // GET: User/Create
+        public ActionResult Createcontent()
         {
-            if (username == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UserContent user = _context.UserContents.Find(username);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-        // GET: UserContent/Edit/5
-        public ActionResult Edit(string username)
-        {
-            if (username == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UserContent user = _context.UserContents.Find(username);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
+            return View();
         }
 
-        // POST: UserContent/Edit/5
+        // POST: User/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(UserContent user)
+        public ActionResult Createcontent(UserContent user)
         {
             if (ModelState.IsValid)
             {
-                _context.Entry(user).State = EntityState.Modified;
+                _context.UserContents.Add(user);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(user);
         }
-
-        // GET: UserContent/Delete/5
         public ActionResult Delete(string username)
         {
-            if (username == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UserContent user = _context.UserContents.Find(username);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // POST: UserContent/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string username)
-        {
-            UserContent user = _context.UserContents.Find(username);
+            var user = _context.UserContents.Find(username);
             _context.UserContents.Remove(user);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
-        //private byte[] UploadPhoto(HttpPostedFileBase image)
+        //public ActionResult Delete(string username)
         //{
-        //    throw new NotImplementedException();
+        //    if (username == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    UserContent user = _context.UserContents.Find(username);
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(user);
         //}
 
+        //// POST: UserContent/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(string username)
+        //{
+        //    UserContent user = _context.UserContents.Find(username);
+        //    _context.UserContents.Remove(user);
+        //    _context.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
         private string UploadPhoto(HttpPostedFileBase image)
         {
             string result = string.Empty;

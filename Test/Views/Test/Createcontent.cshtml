@@ -1,0 +1,73 @@
+﻿@model Test.Models.UserContent
+@using Test.Models
+@{
+    ViewBag.Title = "Createcontent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+<div class="container-fluid" style="margin-top:60px;background:white">
+    @using (Html.BeginForm("Createcontent", "Test", FormMethod.Post, new { enctype = "multipart/form-data", id = "Create", name = "Create" }))
+    {
+        <div class="row">
+            <div class="">
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Add Or Edit Record</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="Name">User*</label>
+                            @Html.TextBoxFor(a => a.Username, new { @class = "form-control", @Required = "required" })
+                            <span class="text-danger">@Html.ValidationMessageFor(a => a.Username)</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="Name">First Name*</label>
+                            @Html.TextBoxFor(a => a.FirstName, new { @class = "form-control", @Required = "required" })
+                            <span class="text-danger">@Html.ValidationMessageFor(a => a.FirstName)</span>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="Name">Last Name*</label>
+                            @Html.TextBoxFor(a => a.LastName, new { @class = "form-control", @Required = "required" })
+                            <span class="text-danger">@Html.ValidationMessageFor(a => a.LastName)</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="Name">ThreeDigitNumber*</label>
+                            @Html.TextBoxFor(a => a.ThreeDigitNumber, new { @class = "form-control", @Required = "required" })
+                            <span class="text-danger">@Html.ValidationMessageFor(a => a.ThreeDigitNumber)</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="Name">Wins*</label>
+                            @Html.TextBoxFor(a => a.Wins, new { @class = "form-control", @Required = "required" })
+                            <span class="text-danger">@Html.ValidationMessageFor(a => a.Wins)</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="Name">Losses*</label>
+                            @Html.TextBoxFor(a => a.Losses, new { @class = "form-control", @Required = "required" })
+                            <span class="text-danger">@Html.ValidationMessageFor(a => a.Losses)</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 singlesacrensavebuttonmargin" style="float:right">
+                            <button type="reset" class="btn btn-success pull-right" style="margin-left:5px;background-color:green;border-color:green; margin: 5px;"><a href="~/Test/Index" style="color:white;">Cancel</a> </button>
+                            <button type="submit" id="Savecategory" class="btn btn-primary pull-right" style="margin: 5px;">Save</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    }
+</div>
+<style>
+</style>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    CKEDITOR.replace('editor1');
+</script>
+
+
+

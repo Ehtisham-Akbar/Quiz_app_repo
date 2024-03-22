@@ -11,23 +11,21 @@
         <th>Three Digit Number</th>
         <th>Wins</th>
         <th>Losses</th>
-        <th></th>
+        <th>Action</th>
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Username)</td>
-            <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-            <td>@Html.DisplayFor(modelItem => item.LastName)</td>
-            <td>@Html.DisplayFor(modelItem => item.ThreeDigitNumber)</td>
-            <td>@Html.DisplayFor(modelItem => item.Wins)</td>
-            <td>@Html.DisplayFor(modelItem => item.Losses)</td>
-            <td>
-               <a href="/Test/Edit/@item.Username">Edit</a>
-               <a href="/Test/Create">Create</a>
-               <a href="/Test/Delete/@item.Username">Delete</a>
-            </td>
-        </tr>
+<tr>
+    <td>@Html.DisplayFor(modelItem => item.Username)</td>
+    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+    <td>@Html.DisplayFor(modelItem => item.ThreeDigitNumber)</td>
+    <td>@Html.DisplayFor(modelItem => item.Wins)</td>
+    <td>@Html.DisplayFor(modelItem => item.Losses)</td>
+    <td><a href="@Url.Action("Delete", "Test", new { username = item.Username })">Delete</a></td>
+
+
+</tr>
     }
 </table>
 

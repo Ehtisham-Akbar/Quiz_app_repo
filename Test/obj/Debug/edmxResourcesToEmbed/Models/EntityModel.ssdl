@@ -11,7 +11,7 @@
     <Property Name="AnswerC" Type="varchar" MaxLength="100" />
     <Property Name="AnswerD" Type="varchar" MaxLength="100" />
     <Property Name="CorrectAnswer" Type="char" MaxLength="1" />
-    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="Image" Type="nvarchar(max)" />
     <Property Name="Username" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="NetworkInfo">

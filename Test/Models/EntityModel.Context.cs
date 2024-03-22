@@ -25,8 +25,8 @@ namespace Test.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ContentQuestion> ContentQuestions { get; set; }
         public virtual DbSet<NetworkInfo> NetworkInfoes { get; set; }
         public virtual DbSet<UserContent> UserContents { get; set; }
+        public virtual DbSet<ContentQuestion> ContentQuestions { get; set; }
     }
 }
