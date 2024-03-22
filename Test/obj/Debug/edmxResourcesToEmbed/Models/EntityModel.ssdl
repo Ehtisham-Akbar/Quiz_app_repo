@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ContentQuestions">
+    <Key>
+      <PropertyRef Name="QuestionID" />
+    </Key>
+    <Property Name="QuestionID" Type="int" Nullable="false" />
+    <Property Name="QuestionText" Type="varchar" MaxLength="255" />
+    <Property Name="AnswerA" Type="varchar" MaxLength="100" />
+    <Property Name="AnswerB" Type="varchar" MaxLength="100" />
+    <Property Name="AnswerC" Type="varchar" MaxLength="100" />
+    <Property Name="AnswerD" Type="varchar" MaxLength="100" />
+    <Property Name="CorrectAnswer" Type="char" MaxLength="1" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="NetworkInfo">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" Nullable="false" />
+    <Property Name="NetworkName" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="UserContent">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="ThreeDigitNumber" Type="int" />
+    <Property Name="Wins" Type="int" />
+    <Property Name="Losses" Type="int" />
+  </EntityType>
+  <Association Name="FK_ContentQuestions_UserContent">
+    <End Role="UserContent" Type="Self.UserContent" Multiplicity="0..1" />
+    <End Role="ContentQuestions" Type="Self.ContentQuestions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserContent">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="ContentQuestions">
+        <PropertyRef Name="Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestModelStoreContainer">
+    <EntitySet Name="ContentQuestions" EntityType="Self.ContentQuestions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NetworkInfo" EntityType="Self.NetworkInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserContent" EntityType="Self.UserContent" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ContentQuestions_UserContent" Association="Self.FK_ContentQuestions_UserContent">
+      <End Role="UserContent" EntitySet="UserContent" />
+      <End Role="ContentQuestions" EntitySet="ContentQuestions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
